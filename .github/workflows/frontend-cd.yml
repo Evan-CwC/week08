@@ -43,6 +43,9 @@ jobs:
   deploy_frontend:
     runs-on: ubuntu-latest
     environment: Production
+        env:
+      ACR_NAME: ${{ secrets.ACR_NAME }}
+      ACR_LOGIN_SERVER: ${{ secrets.ACR_LOGIN_SERVER }}
 
     steps:
       - name: Checkout repository
