@@ -57,6 +57,11 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Debug ACR vars
+        run: |
+          echo "ACR_NAME=${{ env.ACR_NAME }}"
+          echo "ACR_LOGIN_SERVER=${{ env.ACR_LOGIN_SERVER }}"
+
       # Login to Azure Container Registry (ACR)
       - name: Login to Azure Container Registry
         run: az acr login --name ${{ secrets.AZURE_CONTAINER_REGISTRY }}
