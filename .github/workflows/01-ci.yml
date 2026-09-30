@@ -5,13 +5,16 @@ on:
   push:
     branches:
       - main
-  
+
+  # Run tests on pull requests into main (no image push)
+  pull_request:
+    branches:
+      - main
+
   # Manual trigger for the workflow
   workflow_dispatch:
 
-
 jobs:
-
   # =========================================================
   # Backend Tests
   # =========================================================
@@ -81,7 +84,6 @@ jobs:
       AZURE_STORAGE_CONTAINER_NAME: ""
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v5
 
@@ -100,7 +102,6 @@ jobs:
         working-directory: ${{ matrix.service }}
         run: |
           pytest -v
-
 
   # =========================================================
   # Build and Push Docker Images
@@ -140,7 +141,6 @@ jobs:
             image: koalatech-enrollment-service
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v5
 
@@ -164,4 +164,5 @@ jobs:
         run: |
           docker push \
             ${{ vars.ACR_LOGIN_SERVER }}/${{ matrix.image }}:${{ github.sha }}
+
 # Week 09 monitoring redeploy
